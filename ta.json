@@ -8,6 +8,7 @@
     "aws_vpc_id": "",
     "aws_subnet_id": "",
     "ami_name_prefix": "terraform-ansible",
+    "packer_version": "0.8.0",
     "terraform_version": "0.5.3"
   },
   "builders": [{
@@ -30,15 +31,25 @@
     },
     {
       "type": "shell",
-      "script": "scripts/ansible.sh",
+      "script": "scripts/package.sh",
+      "environment_vars": [
+            "VERSION={{user `packer_version`}}",
+            "PACKAGE=packer"
+        ],
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
     },
     {
       "type": "shell",
-      "script": "scripts/terraform.sh",
+      "script": "scripts/package.sh",
       "environment_vars": [
-            "TERRAFORM_VERSION={{user `terraform_version`}}"
+            "VERSION={{user `terraform_version`}}",
+            "PACKAGE=terraform"
         ],
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/ansible.sh",
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
     }
   ]

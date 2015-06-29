@@ -1,12 +1,11 @@
 Provisioning box containing Terraform & Ansible AMI built with Packer
 =============
 
+## Requirements
+
 Install [Packer](https://www.packer.io/) and add it to your PATH.
 
-Create your AMI in AWS using your access and secret keys.
-
-This also installs [Consul](https://www.consul.io/). This will need to be configured separately as it would be a good
-idea to join an existing consul cluster.
+At the end of this process you will have a new AMI with Packer, Terraform and Ansible installed.
 
 ## Usage
 
