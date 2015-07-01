@@ -27,6 +27,7 @@ Extra variables exposed:
 * aws_region (defaults to `ap-southeast-2`)
 * aws_instance_type (defaults to `t2.small`)
 * ami_name_prefix (defaults to `terraform-ansible`)
+* go_version (defaults to `1.4.2`)
 * packer_version (defaults to `0.8.0`)
 * terraform_version (defaults to `0.5.3`)
 * vpc_id (defaults to ``)

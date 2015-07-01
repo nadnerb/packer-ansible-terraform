@@ -9,7 +9,8 @@
     "aws_subnet_id": "",
     "ami_name_prefix": "terraform-ansible",
     "packer_version": "0.8.0",
-    "terraform_version": "0.5.3"
+    "terraform_version": "0.5.3",
+    "go_version": "1.4.2"
   },
   "builders": [{
     "type": "amazon-ebs",
@@ -27,6 +28,14 @@
     {
       "type": "shell",
       "script": "scripts/default.sh",
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/go.sh",
+      "environment_vars": [
+            "VERSION={{user `go_version`}}"
+        ],
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
     },
     {
